@@ -1,0 +1,104 @@
+models:
+  # 模型输出名字
+  name: mobile_netv2
+
+  # 原始模型格式
+  platform: onnx
+
+  # 原始模型输入文件
+  model_file_path: ./mobilenetv2.onnx
+
+  # 模型先验信息
+  ## 可以根据原始onnx的输入输出信息进行自定义
+  subgraphs:
+
+    # 输入tensor的形状
+    input_size_list:
+      - 1,3,224,224
+    
+    # 输入tensor的名字
+    inputs:
+      - input
+
+    # 输出tensor的名字
+    outputs:
+      - output
+    
+  # 量化设置
+  quantize: true
+
+  # 量化参考数据集相对路径
+  dataset: ILSVRC2012_img_val_samples/dataset_20.txt
+
+  # RKNN模型具体设置
+  configs:
+
+    # rknn.config quantized_dtype
+    quantized_dtype: asymmetric_quantized-8
+
+    # rknn.config mean_values
+    mean_values: [127.5,127.5,127.5]
+
+    # rknn.config std_values
+    std_values: [128.0,128.0,128.0]
+
+    # rknn.config quant_img_RGB2BGR
+    quant_img_RGB2BGR: False
+
+    # rknn.config quantized_algorithm
+    quantized_algorithm: normal
+    
+    # rknn.config quantized_method
+    quantized_method: channel
+
+    # rknn.config optimization_level
+    optimization_level: 3
+    
+    # rknn.config model_pruning
+    model_pruning: False
+    
+    # rknn.config quantize_weight
+    quantize_weight: False
+
+    # rknn.config single_core_mode
+    single_core_mode: False
+
+    # rknn.config sparse_infer
+    sparse_infer: False
+
+    # channel_mean_value
+    channel_mean_value: None
+    
+    
+    # rknn.config quantized_hybrid_level
+    quantized_hybrid_level: 0
+    
+    # rknn.config float dtype
+    float dtype: float16
+
+    # rknn.config custom_string
+    custom_string: None
+  
+    # rknn.config remove_weight
+    remove_weight: False
+    
+    # rknn.config compress_weight
+    compress_weight: False
+    
+    # rknn.config inputs_yuv_fmt
+    inputs_yuv_fmt: None
+    
+    # rknn.config dynamic_input
+    dynamic_input: None
+    
+    # rknn.config op_target
+    op_target: None
+    
+    # rknn.config remove_reshape
+    remove_reshape: False
+    
+    # rknn.config enable_flash_attention
+    enable_flash_attention: False
+    
+
+
